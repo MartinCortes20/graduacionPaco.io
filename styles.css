@@ -370,7 +370,7 @@ button:focus-visible {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Prevenir FOUC (Flash of Unstyled Content) */
+/* Prevenir FOUC (Flash of Unstyled Content) - SIN fade */
 .hero-card,
 .welcome-card,
 .event-info-card,
@@ -380,56 +380,21 @@ button:focus-visible {
 .transfer-card,
 .video-card,
 .closing-card {
-    opacity: 0;
-    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 1;
+    animation: none;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Stagger animation delays - optimizado para mobile */
-.hero-card {
-    animation-delay: 0s;
-}
-
-.welcome-card {
-    animation-delay: 0.1s;
-}
-
-.event-info-card {
-    animation-delay: 0.15s;
-}
-
-.cost-card {
-    animation-delay: 0.2s;
-}
-
-.calendar-card {
-    animation-delay: 0.25s;
-}
-
-.options-card {
-    animation-delay: 0.3s;
-}
-
-.transfer-card {
-    animation-delay: 0.35s;
-}
-
-.video-card {
-    animation-delay: 0.4s;
-}
-
+/* Stagger animation delays - DESHABILITADO */
+.hero-card,
+.welcome-card,
+.event-info-card,
+.cost-card,
+.calendar-card,
+.options-card,
+.transfer-card,
+.video-card,
 .closing-card {
-    animation-delay: 0.45s;
+    animation-delay: 0s;
 }
 
 /* Código responsive para clabe y cuenta */
@@ -498,4 +463,61 @@ img:not([src]) {
 /* Asegurar que el texto negro sea siempre visible */
 .text-black {
     color: #000000 !important;
+}
+
+/* Forzar color negro en elementos específicos */
+.payment-item h4,
+.payment-item p {
+    color: #000000 !important;
+}
+
+.payment-option h4,
+.payment-option p {
+    color: #000000 !important;
+}
+
+/* Mejorar legibilidad en cards de pago */
+.payment-item {
+    background: rgba(227, 210, 184, 0.3) !important;
+}
+
+.payment-option {
+    background: rgba(227, 210, 184, 0.3) !important;
+}
+
+/* Asegurar z-index y visibilidad */
+.payment-item,
+.payment-option {
+    position: relative;
+    z-index: 10;
+    isolation: isolate;
+}
+
+/* Eliminar márgenes innecesarios */
+.calendar-card,
+.options-card {
+    margin-bottom: 1rem;
+}
+
+/* Asegurar que no haya espacios en blanco grandes */
+#calendar-container {
+    margin-bottom: 1.5rem;
+}
+
+.space-y-3 > * + * {
+    margin-top: 0.75rem;
+}
+
+/* Forzar opacidad completa en todos los elementos */
+.payment-date-card,
+.calendar-item,
+.payment-item,
+.payment-option,
+.payment-detail {
+    opacity: 1 !important;
+}
+
+/* Deshabilitar cualquier animación de opacidad */
+* {
+    animation: none !important;
 }

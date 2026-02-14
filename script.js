@@ -103,76 +103,8 @@ function initAnimations() {
         }
     }
     
-    // Animaciones scroll - más ligeras en mobile
-    const scrollAnimationConfig = {
-        start: 'top 90%',
-        toggleActions: 'play none none none',
-        once: true // Solo animar una vez para mejor rendimiento
-    };
-    
-    // Calendar items
-    const calendarItems = document.querySelectorAll('.calendar-item');
-    if (calendarItems.length > 0) {
-        gsap.from(calendarItems, {
-            scrollTrigger: {
-                trigger: '.calendar-card',
-                ...scrollAnimationConfig
-            },
-            opacity: 0,
-            y: isMobile ? 15 : 20,
-            duration: isMobile ? 0.4 : 0.5,
-            stagger: 0.08,
-            ease: "power2.out"
-        });
-    }
-    
-    // Payment items
-    const paymentItems = document.querySelectorAll('.payment-item');
-    if (paymentItems.length > 0) {
-        gsap.from(paymentItems, {
-            scrollTrigger: {
-                trigger: '.options-card',
-                ...scrollAnimationConfig
-            },
-            opacity: 0,
-            x: isMobile ? -10 : -20,
-            duration: isMobile ? 0.4 : 0.5,
-            stagger: 0.1,
-            ease: "power2.out"
-        });
-    }
-    
-    // Payment details
-    const paymentDetails = document.querySelectorAll('.payment-detail');
-    if (paymentDetails.length > 0) {
-        gsap.from(paymentDetails, {
-            scrollTrigger: {
-                trigger: '.transfer-card',
-                ...scrollAnimationConfig
-            },
-            opacity: 0,
-            y: isMobile ? 15 : 25,
-            duration: isMobile ? 0.4 : 0.6,
-            stagger: 0.15,
-            ease: "power2.out"
-        });
-    }
-    
-    // Closing texts
-    const closingTexts = document.querySelectorAll('.closing-text');
-    if (closingTexts.length > 0) {
-        gsap.from(closingTexts, {
-            scrollTrigger: {
-                trigger: '.closing-card',
-                ...scrollAnimationConfig
-            },
-            opacity: 0,
-            y: isMobile ? 10 : 15,
-            duration: isMobile ? 0.5 : 0.7,
-            stagger: 0.2,
-            ease: "power2.out"
-        });
-    }
+    // Animaciones scroll DESHABILITADAS para evitar desvanecidos
+    // Se mantienen todos los elementos con opacidad 1 siempre
 }
 
 // Función para copiar al portapapeles
