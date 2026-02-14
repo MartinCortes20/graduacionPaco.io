@@ -1,0 +1,501 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Paleta de colores personalizada */
+:root {
+    --primary: #6B212E;           /* Vino/Burgundy oscuro */
+    --primary-dark: #171A26;      /* Azul oscuro casi negro */
+    --secondary: #8C3E37;         /* Terracota/Rojizo */
+    --gold: #D9B88F;              /* Dorado/Beige */
+    --cream: #E3D2B8;             /* Crema */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #E3D2B8 0%, #F5EBE0 50%, #E3D2B8 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tipografía */
+.font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Colores personalizados */
+.text-primary {
+    color: var(--primary);
+}
+
+.text-primary-dark {
+    color: var(--primary-dark);
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.text-gold {
+    color: var(--gold);
+}
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.bg-primary-dark {
+    background-color: var(--primary-dark);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+.bg-gold {
+    background-color: var(--gold);
+}
+
+.bg-cream {
+    background-color: var(--cream);
+}
+
+.border-primary {
+    border-color: var(--primary);
+}
+
+.border-secondary {
+    border-color: var(--secondary);
+}
+
+.border-gold {
+    border-color: var(--gold);
+}
+
+/* Partículas decorativas - optimizadas para mobile */
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(107, 33, 46, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Animación flotante */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-15px) rotate(3deg); 
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Cards principales - optimizados para mobile */
+.hero-card,
+.welcome-card,
+.event-info-card,
+.cost-card,
+.calendar-card,
+.options-card,
+.transfer-card,
+.video-card,
+.closing-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    position: relative;
+    z-index: 1;
+}
+
+/* Optimización de sombras para mobile */
+.shadow-xl {
+    box-shadow: 0 15px 35px rgba(107, 33, 46, 0.08);
+}
+
+.shadow-2xl {
+    box-shadow: 0 20px 45px rgba(107, 33, 46, 0.12);
+}
+
+/* Botones con hover suave */
+.copy-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    position: relative;
+    z-index: 10;
+}
+
+.copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(107, 33, 46, 0.2);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
+/* Hover en opciones de pago */
+.payment-option {
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    z-index: 2;
+}
+
+.payment-option:hover {
+    transform: translateX(3px);
+    border-color: var(--gold);
+}
+
+/* Payment items - asegurar z-index correcto */
+.payment-item {
+    position: relative;
+    z-index: 2;
+}
+
+/* Payment date cards - asegurar z-index correcto */
+.payment-date-card {
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.payment-date-card:hover {
+    box-shadow: 0 8px 20px rgba(107, 33, 46, 0.15);
+    transform: translateY(-3px);
+    z-index: 3;
+}
+
+/* Calendar items - asegurar z-index correcto */
+.calendar-item {
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.calendar-item:hover {
+    transform: scale(1.03);
+    z-index: 3;
+}
+
+/* Payment details - asegurar z-index correcto */
+.payment-detail {
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilos del calendario */
+#calendar-container {
+    position: relative;
+    z-index: 2;
+}
+
+#calendar-grid {
+    background: white;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 0 4px 12px rgba(107, 33, 46, 0.08);
+}
+
+#calendar-grid > div {
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contador de días */
+#payment-countdown {
+    position: relative;
+    z-index: 2;
+}
+
+/* Optimización de imágenes y video */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Lazy loading optimization */
+img[loading="lazy"],
+video[preload="metadata"] {
+    content-visibility: auto;
+}
+
+/* Gradientes personalizados */
+.bg-gradient-to-r {
+    background-image: linear-gradient(to right, var(--primary), var(--primary-dark));
+}
+
+.bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, var(--primary), var(--primary-dark));
+}
+
+/* Responsive optimizations para mobile-first */
+@media (max-width: 640px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .hero-card {
+        border-radius: 1.5rem;
+    }
+    
+    .welcome-card,
+    .event-info-card,
+    .cost-card,
+    .calendar-card,
+    .options-card,
+    .transfer-card,
+    .video-card,
+    .closing-card {
+        border-radius: 1.5rem;
+    }
+    
+    /* Reducir padding en mobile */
+    .p-6 {
+        padding: 1.25rem !important;
+    }
+    
+    .p-8 {
+        padding: 1.5rem !important;
+    }
+    
+    #calendar-grid > div {
+        min-height: 2rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Optimizaciones para tablet y laptop */
+@media (min-width: 641px) {
+    .hero-card,
+    .welcome-card,
+    .event-info-card,
+    .cost-card,
+    .calendar-card,
+    .options-card,
+    .transfer-card,
+    .video-card,
+    .closing-card {
+        border-radius: 2rem;
+    }
+}
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Reducir animaciones para usuarios que prefieran menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Performance: GPU acceleration para elementos animados */
+.hero-card,
+.welcome-card,
+.event-info-card,
+.cost-card,
+.calendar-card,
+.options-card,
+.transfer-card,
+.copy-btn,
+.payment-option,
+.calendar-item,
+.payment-date-card,
+.payment-item,
+.payment-detail {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Prevenir layout shift */
+.video-card video {
+    aspect-ratio: 16 / 9;
+}
+
+/* Text rendering optimization */
+body {
+    text-rendering: optimizeLegibility;
+}
+
+/* Prevenir selección de elementos decorativos */
+.floral-decoration,
+.floral-decoration *,
+.particle,
+svg {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Focus states accesibles */
+button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+/* Transiciones suaves globales */
+* {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevenir FOUC (Flash of Unstyled Content) */
+.hero-card,
+.welcome-card,
+.event-info-card,
+.cost-card,
+.calendar-card,
+.options-card,
+.transfer-card,
+.video-card,
+.closing-card {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger animation delays - optimizado para mobile */
+.hero-card {
+    animation-delay: 0s;
+}
+
+.welcome-card {
+    animation-delay: 0.1s;
+}
+
+.event-info-card {
+    animation-delay: 0.15s;
+}
+
+.cost-card {
+    animation-delay: 0.2s;
+}
+
+.calendar-card {
+    animation-delay: 0.25s;
+}
+
+.options-card {
+    animation-delay: 0.3s;
+}
+
+.transfer-card {
+    animation-delay: 0.35s;
+}
+
+.video-card {
+    animation-delay: 0.4s;
+}
+
+.closing-card {
+    animation-delay: 0.45s;
+}
+
+/* Código responsive para clabe y cuenta */
+code {
+    word-break: break-all;
+    user-select: all;
+    -webkit-user-select: all;
+}
+
+/* Optimización de memoria - limitar animaciones en mobile */
+@media (max-width: 640px) {
+    .particle {
+        display: none;
+    }
+    
+    /* Reducir complejidad de animaciones en mobile */
+    .animate-float {
+        animation: none;
+    }
+}
+
+/* Estados de carga para mejor UX */
+img:not([src]) {
+    background: linear-gradient(90deg, var(--cream) 25%, var(--gold) 50%, var(--cream) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-contrast: high) {
+    .bg-gradient-to-br {
+        background-image: none;
+        background-color: var(--primary);
+    }
+    
+    .text-gold {
+        color: #B89968;
+    }
+}
+
+/* Optimización de rendimiento para scroll */
+.hero-card,
+.welcome-card,
+.event-info-card,
+.cost-card,
+.calendar-card,
+.options-card,
+.transfer-card,
+.video-card,
+.closing-card {
+    contain: layout style paint;
+}
+
+/* Estilos para botones de navegación del calendario */
+#prev-month,
+#next-month {
+    position: relative;
+    z-index: 10;
+}
+
+/* Asegurar que el texto negro sea siempre visible */
+.text-black {
+    color: #000000 !important;
+}
