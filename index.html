@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graduación - Martín Francisco Cortés Buendía</title>
-    <link rel="icon" type="image/png" href="./assets/martin.png">
+    <!-- Favicon con diferentes tamaños para mejor compatibilidad -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://martincortes20.github.io/graduacionPaco.io/assets/martin.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://martincortes20.github.io/graduacionPaco.io/assets/martin.png">
+    <link rel="apple-touch-icon" href="https://martincortes20.github.io/graduacionPaco.io/assets/martin.png">
+    <link rel="shortcut icon" href="https://martincortes20.github.io/graduacionPaco.io/assets/martin.png">
+    
+    <!-- Meta tags para compartir en redes sociales -->
+    <meta property="og:title" content="Graduación - Martín Francisco Cortés Buendía">
+    <meta property="og:description" content="Invitación a mi fiesta de graduación - 07 de Agosto 2026">
+    <meta property="og:image" content="https://martincortes20.github.io/graduacionPaco.io/assets/martin.png">
+    <meta property="og:url" content="https://martincortes20.github.io/graduacionPaco.io/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Graduación - Martín Francisco Cortés Buendía">
+    <meta name="twitter:description" content="Invitación a mi fiesta de graduación">
+    <meta name="twitter:image" content="https://martincortes20.github.io/graduacionPaco.io/assets/martin.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -129,6 +145,50 @@
                 </div>
             </div>
 
+            <!-- Opciones de Pago -->
+            <div class="options-card bg-white rounded-3xl shadow-xl mb-4 overflow-hidden" id="options-card">
+                <div class="p-6 sm:p-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl sm:text-3xl font-playfair font-bold text-black mb-2">
+                            Opciones de Pago
+                        </h3>
+                        <p class="text-sm text-black">Elige la opción que más te convenga</p>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="payment-item bg-gradient-to-r from-cream to-white border-l-4 border-primary p-4 rounded-lg payment-option">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold">
+                                    1
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-black mb-1 text-base">Dividir en 2 pagos</h4>
+                                    <p class="text-sm text-black">Ejemplo: $800 en abril y $800 en junio</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-item bg-gradient-to-r from-cream to-white border-l-4 border-secondary p-4 rounded-lg payment-option">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-shrink-0 w-8 h-8 bg-secondary text-white rounded-full flex items-center justify-center font-bold">
+                                    2
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-black mb-1 text-base">Pago en una sola exhibición</h4>
+                                    <p class="text-sm text-black">En marzo, abril o el mes que prefieran</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-gold/10 border border-gold/30 p-4 rounded-xl">
+                        <p class="text-xs sm:text-sm text-black">
+                            <strong>Nota:</strong> Pueden darme el dinero con anticipación y yo me encargo de depositarlo en la empresa organizadora, o pueden ir pagando poco a poco según les convenga.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Calendario de Pagos -->
             <div class="calendar-card bg-white rounded-3xl shadow-xl mb-4 overflow-hidden" id="calendar-card">
                 <div class="p-6 sm:p-8">
@@ -136,12 +196,12 @@
                         <h3 class="text-2xl sm:text-3xl font-playfair font-bold text-black mb-2">
                             Calendario de Pagos
                         </h3>
-                        <p class="text-sm text-black">Fechas importantes de pago</p>
+                        <p class="text-sm text-black">Fechas sugeridas según la opción elegida</p>
                     </div>
                     
                     <!-- Contador de días hasta el próximo pago -->
                     <div id="payment-countdown" class="mb-6 bg-primary/10 border-2 border-primary rounded-xl p-4 text-center">
-                        <p class="text-sm font-semibold text-black mb-1">Próximo pago:</p>
+                        <p class="text-sm font-semibold text-black mb-1">Próximo pago sugerido:</p>
                         <p id="next-payment-date" class="text-lg font-bold text-primary mb-1"></p>
                         <p id="days-remaining" class="text-2xl font-bold text-secondary"></p>
                     </div>
@@ -161,7 +221,7 @@
                         <div class="mt-4 flex flex-wrap gap-3 justify-center text-xs">
                             <div class="flex items-center gap-2">
                                 <div class="w-4 h-4 bg-red-500 rounded"></div>
-                                <span class="text-black">Fecha de pago</span>
+                                <span class="text-black">Fecha sugerida de pago</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <div class="w-4 h-4 bg-black rounded"></div>
@@ -170,52 +230,47 @@
                         </div>
                     </div>
                     
-                    <!-- Lista de pagos -->
-                    <div class="space-y-3">
-                        <div class="payment-date-card bg-gradient-to-br from-cream to-white border-2 border-primary/20 rounded-xl p-4 calendar-item">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-semibold text-black">1er pago</p>
-                                    <p class="text-lg font-bold text-primary">13 de Marzo</p>
+                    <!-- Opción 1: Dividir en 2 pagos -->
+                    <div class="mb-6">
+                        <h4 class="font-bold text-primary mb-3 text-base">Opción 1: Dividir en 2 pagos</h4>
+                        <div class="space-y-3">
+                            <div class="payment-date-card bg-gradient-to-br from-cream to-white border-2 border-primary/20 rounded-xl p-4 calendar-item">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-semibold text-black">1er pago</p>
+                                        <p class="text-lg font-bold text-primary">13 de Abril</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-2xl font-bold text-secondary">$800</p>
+                                    </div>
                                 </div>
-                                <div class="text-right">
-                                    <p class="text-2xl font-bold text-secondary">$400</p>
+                            </div>
+                            
+                            <div class="payment-date-card bg-gradient-to-br from-cream to-white border-2 border-primary/20 rounded-xl p-4 calendar-item">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-semibold text-black">2do pago</p>
+                                        <p class="text-lg font-bold text-primary">12 de Junio</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-2xl font-bold text-secondary">$800</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="payment-date-card bg-gradient-to-br from-cream to-white border-2 border-primary/20 rounded-xl p-4 calendar-item">
+                    </div>
+                    
+                    <!-- Opción 2: Pago único -->
+                    <div>
+                        <h4 class="font-bold text-secondary mb-3 text-base">Opción 2: Pago en una sola exhibición</h4>
+                        <div class="payment-date-card bg-gradient-to-br from-cream to-white border-2 border-secondary/20 rounded-xl p-4 calendar-item">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-sm font-semibold text-black">2do pago</p>
-                                    <p class="text-lg font-bold text-primary">13 de Abril</p>
+                                    <p class="text-sm font-semibold text-black">Pago único</p>
+                                    <p class="text-lg font-bold text-secondary">Antes del 12 de Junio</p>
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-2xl font-bold text-secondary">$400</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-date-card bg-gradient-to-br from-cream to-white border-2 border-primary/20 rounded-xl p-4 calendar-item">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-semibold text-black">3er pago</p>
-                                    <p class="text-lg font-bold text-primary">13 de Mayo</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-2xl font-bold text-secondary">$400</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-date-card bg-gradient-to-br from-cream to-white border-2 border-primary/20 rounded-xl p-4 calendar-item">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm font-semibold text-black">4to pago</p>
-                                    <p class="text-lg font-bold text-primary">12 de Junio</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-2xl font-bold text-secondary">$400</p>
+                                    <p class="text-2xl font-bold text-primary">$1,600</p>
                                 </div>
                             </div>
                         </div>
@@ -223,73 +278,6 @@
                 </div>
             </div>
 
-            <!-- Opciones de Pago -->
-            <div class="options-card bg-white rounded-3xl shadow-xl mb-4 overflow-hidden" id="options-card">
-                <div class="p-6 sm:p-8">
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl sm:text-3xl font-playfair font-bold text-black mb-2">
-                            Opciones de Pago
-                        </h3>
-                        <p class="text-sm text-black">Elige la opción que más te convenga</p>
-                    </div>
-                    
-                    <div class="space-y-3">
-                        <div class="payment-item bg-gradient-to-r from-cream to-white border-l-4 border-primary p-4 rounded-lg payment-option">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold">
-                                    1
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold text-black mb-1 text-base">Seguir el calendario</h4>
-                                    <p class="text-sm text-black">Dividiendo el total en 4 pagos</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-item bg-gradient-to-r from-cream to-white border-l-4 border-secondary p-4 rounded-lg payment-option">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-shrink-0 w-8 h-8 bg-secondary text-white rounded-full flex items-center justify-center font-bold">
-                                    2
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold text-black mb-1 text-base">Pago en una sola exhibición</h4>
-                                    <p class="text-sm text-black">En marzo, abril o el mes que prefieran</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-item bg-gradient-to-r from-cream to-white border-l-4 border-gold p-4 rounded-lg payment-option">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-shrink-0 w-8 h-8 bg-gold text-primary rounded-full flex items-center justify-center font-bold">
-                                    3
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold text-black mb-1 text-base">Dividir en 2 pagos</h4>
-                                    <p class="text-sm text-black">Ejemplo: $800 en abril y $800 en junio</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-item bg-gradient-to-r from-cream to-white border-l-4 border-primary-dark p-4 rounded-lg payment-option">
-                            <div class="flex items-start gap-3">
-                                <div class="flex-shrink-0 w-8 h-8 bg-primary-dark text-white rounded-full flex items-center justify-center font-bold">
-                                    4
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold text-black mb-1 text-base">Cualquier otra forma</h4>
-                                    <p class="text-sm text-black">Siempre y cuando quede liquidado antes del 12 de junio</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6 bg-gold/10 border border-gold/30 p-4 rounded-xl">
-                        <p class="text-xs sm:text-sm text-black">
-                            <strong>Nota:</strong> Pueden darme el dinero con anticipación y yo me encargo de depositarlo en la empresa organizadora, o pueden ir pagando poco a poco según les convenga.
-                        </p>
-                    </div>
-                </div>
-            </div>
 
             <!-- Datos para Transferencia -->
             <div class="transfer-card bg-white rounded-3xl shadow-xl mb-4 overflow-hidden" id="transfer-card">
@@ -369,13 +357,14 @@
                 <div class="relative w-full" style="padding-bottom: 56.25%;">
                     <video 
                         class="absolute inset-0 w-full h-full object-cover rounded-2xl"
-                        controls
                         autoplay
                         muted
                         loop
                         playsinline
-                        poster="video-poster.jpg"
-                        preload="auto">
+                        preload="auto"
+                        disablepictureinpicture
+                        controlslist="nodownload nofullscreen noremoteplayback"
+                        style="pointer-events: none;">
                         <source src="./assets/pacoBaile.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
@@ -398,7 +387,7 @@
             <!-- Footer -->
             <div class="text-center py-6">
                 <p class="text-black text-sm font-medium">
-                    Con cariño, Martín Cortés Buendía
+                    Con cariño, Martín F. Cortés Buendía <strong>"El Paco"</strong><br>
                 </p>
             </div>
 

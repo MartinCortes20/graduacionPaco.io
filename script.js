@@ -200,12 +200,10 @@ class PaymentCalendar {
         this.currentMonth = this.currentDate.getMonth();
         this.currentYear = this.currentDate.getFullYear();
         
-        // Fechas de pago importantes (año 2026)
+        // Fechas de pago importantes (año 2026) - 2 opciones
         this.paymentDates = [
-            new Date(2026, 2, 13), // 13 de Marzo
-            new Date(2026, 3, 13), // 13 de Abril
-            new Date(2026, 4, 13), // 13 de Mayo
-            new Date(2026, 5, 12)  // 12 de Junio
+            new Date(2026, 3, 13), // 13 de Abril (1er pago opción 2 pagos)
+            new Date(2026, 5, 12)  // 12 de Junio (2do pago opción 2 pagos / fecha límite pago único)
         ];
         
         this.monthNames = [

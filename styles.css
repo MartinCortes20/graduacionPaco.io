@@ -237,6 +237,44 @@ video {
     height: auto;
 }
 
+/* Ocultar controles del video completamente */
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+video::-webkit-media-controls-play-button {
+    display: none !important;
+}
+
+video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+}
+
+/* Para Firefox */
+video::-moz-media-controls {
+    display: none !important;
+}
+
+/* Para IE/Edge */
+video::-ms-media-controls {
+    display: none !important;
+}
+
+/* Asegurar que el video no tenga interacción */
+.video-card video {
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 /* Lazy loading optimization */
 img[loading="lazy"],
 video[preload="metadata"] {
