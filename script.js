@@ -31,16 +31,16 @@ function createParticles() {
     const container = document.getElementById('particles');
     if (!container) return;
     
-    // Solo 10 partículas para mejor rendimiento
-    const particleCount = 10;
+    // Solo 5 partículas para mejor rendimiento
+    const particleCount = 5;
     const fragment = document.createDocumentFragment();
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-        // Tamaño aleatorio entre 4-10px
-        const size = Math.random() * 6 + 4;
+        // Tamaño aleatorio entre 4-8px
+        const size = Math.random() * 4 + 4;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         
@@ -52,10 +52,10 @@ function createParticles() {
         
         // Animación simple y ligera
         gsap.to(particle, {
-            y: `${Math.random() * 60 - 30}`,
-            x: `${Math.random() * 60 - 30}`,
-            opacity: Math.random() * 0.25 + 0.05,
-            duration: Math.random() * 5 + 4,
+            y: `${Math.random() * 40 - 20}`,
+            x: `${Math.random() * 40 - 20}`,
+            opacity: Math.random() * 0.2 + 0.05,
+            duration: Math.random() * 6 + 5,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut",
@@ -66,10 +66,10 @@ function createParticles() {
     container.appendChild(fragment);
 }
 
-// Animaciones de entrada optimizadas
+// Animaciones de entrada minimalistas
 function initAnimations() {
-    // Hero title animation - solo si no es mobile o si la batería es alta
-    if (!isMobile || (navigator.getBattery && navigator.getBattery().then(battery => battery.level > 0.2))) {
+    // Solo animar el hero en desktop
+    if (!isMobile) {
         const heroTitle = document.getElementById('hero-title');
         const heroName = document.getElementById('hero-name');
         const heroDegree = document.getElementById('hero-degree');
@@ -77,34 +77,30 @@ function initAnimations() {
         if (heroTitle) {
             gsap.from(heroTitle, {
                 opacity: 0,
-                y: 20,
-                duration: 0.8,
-                ease: "power2.out",
-                delay: 0.2
+                y: 15,
+                duration: 0.6,
+                ease: "power2.out"
             });
         }
         
         if (heroName) {
             gsap.from(heroName, {
                 opacity: 0,
-                y: 15,
-                duration: 0.7,
+                y: 10,
+                duration: 0.5,
                 ease: "power2.out",
-                delay: 0.4
+                delay: 0.2
             });
         }
         
         if (heroDegree) {
             gsap.from(heroDegree, {
                 opacity: 0,
-                duration: 0.5,
-                delay: 0.6
+                duration: 0.4,
+                delay: 0.3
             });
         }
     }
-    
-    // Animaciones scroll DESHABILITADAS para evitar desvanecidos
-    // Se mantienen todos los elementos con opacidad 1 siempre
 }
 
 // Función para copiar al portapapeles
@@ -164,31 +160,22 @@ function showCopySuccess(button) {
     }, 2000);
 }
 
-// Intersection Observer para lazy loading de video
-function initVideoLazyLoad() {
+// Asegurar autoplay de videos
+function ensureVideoAutoplay() {
     const videos = document.querySelectorAll('video');
-    if (videos.length === 0) return;
-    
-    // Configuración del observer con margen para pre-carga
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const video = entry.target;
-                // Cargar video cuando esté cerca del viewport
-                if (video.dataset.src) {
-                    video.src = video.dataset.src;
-                    video.load();
-                }
-                videoObserver.unobserve(video);
-            }
-        });
-    }, {
-        rootMargin: '100px' // Cargar cuando esté a 100px de ser visible
-    });
     
     videos.forEach(video => {
-        if (video.dataset.src) {
-            videoObserver.observe(video);
+        // Intentar reproducir
+        const playPromise = video.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log('Autoplay bloqueado, intentando de nuevo...');
+                // Reintentar después de interacción del usuario
+                document.addEventListener('click', function() {
+                    video.play();
+                }, { once: true });
+            });
         }
     });
 }
@@ -197,13 +184,14 @@ function initVideoLazyLoad() {
 class PaymentCalendar {
     constructor() {
         this.currentDate = new Date();
+        // Iniciar en el mes actual
         this.currentMonth = this.currentDate.getMonth();
         this.currentYear = this.currentDate.getFullYear();
         
-        // Fechas de pago importantes (año 2026) - 2 opciones
+        // FECHAS CORRECTAS DE PAGO 2026 - SOLO ESTAS DOS FECHAS
         this.paymentDates = [
-            new Date(2026, 3, 13), // 13 de Abril (1er pago opción 2 pagos)
-            new Date(2026, 5, 12)  // 12 de Junio (2do pago opción 2 pagos / fecha límite pago único)
+            new Date(2026, 3, 13), // 13 de Abril 2026 (mes 3 = Abril en JS)
+            new Date(2026, 5, 12)  // 12 de Junio 2026 (mes 5 = Junio en JS)
         ];
         
         this.monthNames = [
@@ -258,11 +246,11 @@ class PaymentCalendar {
             this.currentMonth = 11;
         }
         
-        // Limitar a meses relevantes (Feb-Jun 2026)
+        // Limitar a meses relevantes (Febrero-Junio 2026)
         if (this.currentYear === 2026) {
-            if (this.currentMonth < 1) { // Antes de Febrero
+            if (this.currentMonth < 1) { // Antes de Febrero (mes 1)
                 this.currentMonth = 1;
-            } else if (this.currentMonth > 5) { // Después de Junio
+            } else if (this.currentMonth > 5) { // Después de Junio (mes 5)
                 this.currentMonth = 5;
             }
         }
@@ -304,14 +292,13 @@ class PaymentCalendar {
         // Agregar días del mes
         for (let day = 1; day <= daysInMonth; day++) {
             const dayCell = document.createElement('div');
-            const currentDate = new Date(this.currentYear, this.currentMonth, day);
             
-            // Verificar si es fecha de pago
-            const isPaymentDate = this.paymentDates.some(date => 
-                date.getDate() === day && 
-                date.getMonth() === this.currentMonth && 
-                date.getFullYear() === this.currentYear
-            );
+            // Verificar si es fecha de pago - COMPARACIÓN EXACTA
+            const isPaymentDate = this.paymentDates.some(date => {
+                return date.getDate() === day && 
+                       date.getMonth() === this.currentMonth && 
+                       date.getFullYear() === this.currentYear;
+            });
             
             // Verificar si es el día actual
             const isToday = this.currentDate.getDate() === day && 
@@ -319,7 +306,7 @@ class PaymentCalendar {
                            this.currentDate.getFullYear() === this.currentYear;
             
             // Aplicar estilos
-            let cellClasses = 'p-2 text-center rounded-lg text-sm sm:text-base transition-all';
+            let cellClasses = 'p-2 text-center rounded-lg text-sm sm:text-base transition-all cursor-default';
             
             if (isToday) {
                 cellClasses += ' bg-black text-white font-bold';
@@ -400,11 +387,11 @@ function init() {
         createParticles();
     }
     
-    // Inicializar animaciones
+    // Inicializar animaciones minimalistas
     initAnimations();
     
-    // Setup video lazy loading
-    initVideoLazyLoad();
+    // Asegurar autoplay de videos
+    ensureVideoAutoplay();
     
     // Inicializar calendario
     new PaymentCalendar();
@@ -436,6 +423,14 @@ document.addEventListener('visibilitychange', () => {
     } else {
         // Reanudar animaciones
         gsap.globalTimeline.resume();
+        
+        // Reanudar videos
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            if (video && video.paused) {
+                video.play();
+            }
+        });
     }
 });
 
@@ -444,12 +439,21 @@ if (navigator.getBattery) {
     navigator.getBattery().then(battery => {
         // Si la batería está baja, reducir animaciones
         if (battery.level < 0.2) {
+            // Eliminar partículas si hay bajo nivel de batería
+            const particles = document.getElementById('particles');
+            if (particles) {
+                particles.innerHTML = '';
+            }
             gsap.globalTimeline.timeScale(2); // Acelerar animaciones
         }
         
         // Listener para cambios en el nivel de batería
         battery.addEventListener('levelchange', () => {
             if (battery.level < 0.2) {
+                const particles = document.getElementById('particles');
+                if (particles) {
+                    particles.innerHTML = '';
+                }
                 gsap.globalTimeline.timeScale(2);
             } else {
                 gsap.globalTimeline.timeScale(1);
@@ -458,12 +462,12 @@ if (navigator.getBattery) {
     });
 }
 
-// Limpiar memoria cada 5 minutos
+// Limitar uso de memoria - limpiar cada 10 minutos en desktop
 if (!isMobile) {
     setInterval(() => {
         // Forzar garbage collection si está disponible (solo en algunos navegadores)
         if (window.gc) {
             window.gc();
         }
-    }, 300000); // 5 minutos
+    }, 600000); // 10 minutos
 }
